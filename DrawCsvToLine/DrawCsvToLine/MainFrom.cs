@@ -62,9 +62,9 @@ namespace DrawCsvToLine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            line2.IsVisible = !line2.IsVisible;//显示or隐藏曲线
-            //cartesianChart1.Series = new ISeries[] { line1, line2 };
+           line2.IsVisible = !line2.IsVisible;//显示or隐藏曲线
             //Utils.Utils.saveChartToImg(cartesianChart1);//保存图片
+
         }
     }
 
