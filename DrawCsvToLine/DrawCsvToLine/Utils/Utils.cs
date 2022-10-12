@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using System.IO;
+using System.Diagnostics;
 
 namespace DrawCsvToLine.Utils
 {
@@ -39,7 +40,7 @@ namespace DrawCsvToLine.Utils
                 Console.WriteLine(folderPath);
             }
         }
-        public static void selectFolder2()
+        public static string selectFolder2()
         {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.Description = "please select the folder path";
@@ -47,6 +48,11 @@ namespace DrawCsvToLine.Utils
             {
                 string foldPath = dialog.SelectedPath;
                 Console.WriteLine(foldPath);
+                return foldPath;
+            }
+            else
+            {
+                return null;
             }
         }
         public static void selectFile()
@@ -62,6 +68,20 @@ namespace DrawCsvToLine.Utils
                 string filePath = fileDialog.FileName;
                 Console.WriteLine(filePath);
             }
+        }
+        // 遍历所有文件夹下的文件名字
+        public static string[] addFileSystemEntries(string path)
+        {
+
+            // Obtain the file system entries in the directory path.
+            string[] directoryEntries = System.IO.Directory.GetFileSystemEntries(path, "*.*");
+            Array.Sort(directoryEntries);
+            //for (int i = 0; i < directoryEntries.Length; i++)
+            //{
+                //Debug.Log(i + "  " + directoryEntries[i]);
+            //}
+            return directoryEntries;
+
         }
     }
 }

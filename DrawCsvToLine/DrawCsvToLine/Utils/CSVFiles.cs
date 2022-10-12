@@ -98,39 +98,7 @@ namespace DrawCsvToLine.Utils
         /// <param name="func">字段解析规则</param>
         /// <param name="defaultEncoding">文件编码</param>
         /// <returns></returns>
-        //public static List<T> Read<T>(string path, Func<string[], T> func, Encoding defaultEncoding = null,bool isLine = false) where T : class
-        //{
-        //    if (defaultEncoding == null)
-        //    {
-        //        defaultEncoding = Encoding.UTF8;
-        //    }
-        //    List<T> list = new List<T>();
-        //    using (TextFieldParser parser = new TextFieldParser(path, defaultEncoding))
-        //    {
-        //        parser.TextFieldType = FieldType.Delimited;
-        //        //设定逗号分隔符
-        //        parser.SetDelimiters(",");
-        //        //设定不忽略字段前后的空格
-        //        parser.TrimWhiteSpace = false;
-        //        //bool isLine = false;
-        //        while (!parser.EndOfData)
-        //        {
-        //            string[] fields = parser.ReadFields();
-        //            if (isLine)
-        //            {
-        //                var obj = func(fields);
-        //                if (obj != null) list.Add(obj);
-        //            }
-        //            else
-        //            {
-        //                //忽略标题行业
-        //                isLine = true;
-        //            }
-        //        }
-        //    }
-        //    return list;
-        //}
-        public static List<T> Read<T>(string path, Encoding defaultEncoding = null, bool isLine = false)where T : class
+        public static List<T> Read<T>(string path, Func<string[], T> func, Encoding defaultEncoding = null,bool isLine = false) where T : class
         {
             if (defaultEncoding == null)
             {
@@ -150,9 +118,8 @@ namespace DrawCsvToLine.Utils
                     string[] fields = parser.ReadFields();
                     if (isLine)
                     {
-                        //var obj = func(fields);
-                        var obj = new List<string>(fields);
-                        //if (obj != null) list.Add(obj);
+                        var obj = func(fields);
+                        if (obj != null) list.Add(obj);
                     }
                     else
                     {
